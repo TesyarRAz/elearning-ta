@@ -1,0 +1,28 @@
+name: Web Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy-heroku:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy to Heroku
+      # You may pin to the exact commit or the version.
+      # uses: AkhileshNS/heroku-deploy@cdd8fc68da4ad96ca0384cfa50d9e3eb2a6f6c1b
+      uses: AkhileshNS/heroku-deploy@v3.6.8
+      with:
+        # This will be used for authentication. You can find it in your heroku homepage account settings
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        # Email that you use with heroku
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        # The appname to use for deploying/updating
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        # Set if your app is located in a subdirectory.
+        appdir: "web"
+        # Contents of the Procfile to save and deploy
+        procfile: "web: vendor/bin/heroku-php-apache2 public/"
