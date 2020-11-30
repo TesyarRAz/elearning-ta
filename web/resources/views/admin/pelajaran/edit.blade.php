@@ -30,8 +30,8 @@
 
 @push('js')
 	<script type="text/javascript" async>
-		$(document).ready(function() {
-			let editor = ClassicEditor.create(document.querySelector("#pelajaran-keterangan-edit"));
+		$(document).ready(async function() {
+			let editor = await ClassicEditor.create(document.querySelector("#pelajaran-keterangan-edit"));
 		
 			window.edit = function(id) {
 				$.getJSON(`{{ url('admin/pelajaran') }}/${id}`, data => {
