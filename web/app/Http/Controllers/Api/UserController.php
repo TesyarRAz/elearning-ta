@@ -34,7 +34,7 @@ class UserController extends Controller
             return $query->where('username', $data['username_email'])->orWhere('email', $data['username_email']);
         })->first();
 
-        if (\Hash::check($data['password'], $user['password']))
+        if (!empty($user) && \Hash::check($data['password'], $user['password']))
         {
             auth()->login($user);
 
