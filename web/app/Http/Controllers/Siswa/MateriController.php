@@ -32,6 +32,17 @@ class MateriController extends Controller
         return back()->withStatus('Berhasil mark materi');
     }
 
+    public function unmark(Materi $materi)
+    {
+        auth()->user()->siswa->materi()->updateOrCreate([
+            'materi_id' => $materi->id,
+        ], [
+            'marked' => false
+        ]);
+
+        return back()->withStatus('Berhasil unmark materi');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

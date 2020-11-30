@@ -24,6 +24,8 @@ class CreateTesTable extends Migration
             $table->integer('total_soal');
             $table->integer('waktu_pengerjaan');
 
+            $table->enum('type', ['one_used', 're_used'])->default('one_used');
+
             $table->timestamps();
         });
     }

@@ -59,6 +59,7 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 		Route::name('materi.index')->get('/materi/{modul}', 'MateriController@index');
 		Route::name('materi.show')->get('/materi/{modul}/learn/{materi}', 'MateriController@show');
 		Route::name('materi.mark')->get('/materi/mark/{materi}', 'MateriController@mark');
+		Route::name('materi.unmark')->get('/materi/unmark/{materi}', 'MateriController@unmark');
 
 		Route::name('tes.index')->get('/tes/{modul}', 'TesController@index');
 		Route::name('tes.show')->get('/tes/join/{tes}', 'TesController@show');

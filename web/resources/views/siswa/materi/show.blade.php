@@ -5,15 +5,21 @@
 		<div class="clearfix border-bottom pb-3 mb-2">
 
 			<div class="float-left">
-				<a href="{{ url()->previous() }}" class="d-inline-block">
+				<a href="{{ route('siswa.materi.index', $materi->modul_id) }}" class="d-inline-block">
 					<i class="fas fa-fw fa-arrow-left"></i>
 				</a>
 				<h4 class="lead d-inline-block">{{ $materi->name }}</h4>
 			</div>
 
-			<a href="{{ route('siswa.materi.mark', $materi->id) }}" class="btn btn-sm btn-outline-primary float-right {{ auth()->user()->siswa->isMarked($materi) ? 'active' : '' }}">
-				Tandai sudah dipelajari
-			</a>
+			@if(!auth()->user()->siswa->isMarked($materi))
+				<a href="{{ route('siswa.materi.mark', $materi->id) }}" class="btn btn-sm btn-outline-primary float-right">
+					Tandai sudah dipelajari
+				</a>
+				@else
+				<a href="{{ route('siswa.materi.unmark', $materi->id) }}" class="btn btn-sm btn-outline-primary float-right">
+					Batal Tandai Selesai
+				</a>
+			@endif
 		</div>
 		
 		{!! $materi->keterangan !!}

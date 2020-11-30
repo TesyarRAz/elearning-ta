@@ -1,9 +1,5 @@
 @extends('siswa.layout')
 
-@push('css')
-	
-@endpush
-
 @section('content')
 	<div class="my-3">
 		<h4 class="lead mb-2 pb-3 border-bottom">Modul {{ $modul->name }}</h4>
