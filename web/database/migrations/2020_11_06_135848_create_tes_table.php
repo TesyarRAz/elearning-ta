@@ -25,6 +25,7 @@ class CreateTesTable extends Migration
             $table->integer('waktu_pengerjaan');
 
             $table->enum('type', ['one_used', 're_used'])->default('one_used');
+            $table->string('password')->nullable();
 
             $table->timestamps();
         });

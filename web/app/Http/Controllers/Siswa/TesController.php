@@ -103,7 +103,9 @@ class TesController extends Controller
 
         if ($siswa_tes->sisa_waktu->lte(now()))
         {
-            return redirect()->route('siswa.tes.selesai', compact('tes', 'siswa_tes'));
+            return redirect()
+            ->route('siswa.tes.selesai', compact('tes', 'siswa_tes'))
+            ->withStatus('Anda telah selesai mengerjakan tes, nilai dapat dilihat dibagian nilai');
         }
 
         return view('siswa.tes.edit', compact('tes', 'data', 'soal', 'siswa_tes'));

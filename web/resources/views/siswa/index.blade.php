@@ -6,7 +6,7 @@
 		<hr>
 		@foreach($top_moduls as $top)
 			<div class="row">
-				<div class="col-lg-4 col-md-5 col-6">
+				<div class="col-lg-4 col-md-5">
 					<div class="card">
 						<div class="card-header bg-primary text-white">
 							<h5 class="card-title">{{ $top->name }}</h5>
