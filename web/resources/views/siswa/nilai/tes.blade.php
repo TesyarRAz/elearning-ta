@@ -11,12 +11,14 @@
 					<th rowspan="2">No</th>
 					<th rowspan="2">Nama Modul</th>
 					<th rowspan="2">Nama Tes</th>
-					<th colspan="3">Nilai</th>
+					<th colspan="4">Nilai</th>
+					<th rowspan="2">Tanggal</th>
 				</tr>
 				<tr>
 					<th>Nilai</th>
 					<th>Benar</th>
 					<th>Salah</th>
+					<th>Total Soal</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,6 +30,8 @@
 						<td>{{ $t->nilai }}</td>
 						<td>{{ $t->benar }}</td>
 						<td>{{ $t->salah }}</td>
+						<td>{{ $t->tes->total_soal }}</td>
+						<td>{{ $t->created_at->format('Y-m-d') }}</td>
 					</tr>
 				@endforeach
 			</tbody>

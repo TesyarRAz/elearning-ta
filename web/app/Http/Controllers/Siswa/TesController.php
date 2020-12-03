@@ -44,6 +44,17 @@ class TesController extends Controller
      */
     public function store(Request $request, Tes $tes)
     {
+        if ($tes->type == 'one_used')
+        {
+            $siswa_tes = auth()->user()->siswa->tesses()->whereTesId($tes->id)->first();
+
+            if (!empty($siswa_tes))
+            {
+                $siswa_tes->pilihans()->delete();
+                $siswa_tes->delete();
+            }
+        }
+
         $siswa_tes = auth()->user()->siswa
         ->tesses()
         ->create([
@@ -103,9 +114,7 @@ class TesController extends Controller
 
         if ($siswa_tes->sisa_waktu->lte(now()))
         {
-            return redirect()
-            ->route('siswa.tes.selesai', compact('tes', 'siswa_tes'))
-            ->withStatus('Anda telah selesai mengerjakan tes, nilai dapat dilihat dibagian nilai');
+            return redirect()->route('siswa.tes.selesai', compact('tes', 'siswa_tes'));
         }
 
         return view('siswa.tes.edit', compact('tes', 'data', 'soal', 'siswa_tes'));
@@ -124,16 +133,6 @@ class TesController extends Controller
             'soal_id' => 'required|exists:soals,id',
             'pilihan_id' => 'required|exists:pilihans,id',
         ]);
-
-        // $benar = false;
-        // $pilihans = Soal::findOrFail($data['soal_id'])->pilihans;
-        // foreach ($pilihans as $p)
-        // {
-        //     if ($p->benar && $p->id == $data['pilihan_id'])
-        //     {
-        //         $benar = true;
-        //     }
-        // }
 
         // Mengecek apakah yang diinputkan benar atau salah
         $benar = Soal::findOrFail($data['soal_id'])
@@ -165,7 +164,7 @@ class TesController extends Controller
 
         auth()->user()->state()->update(['state' => 'initial', 'values' => null]);
 
-        return redirect()->route('home')
+        return redirect()->route('siswa.index')
         ->withStatus('Anda telah mengerjakan soal, Nilai ' . $nilai);
     }
 

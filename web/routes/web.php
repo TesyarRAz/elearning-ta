@@ -79,4 +79,6 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 		Route::resource('pelajaran', 'PelajaranController');
 		Route::post('pelajaran/data', 'PelajaranController@data')->name('pelajaran.data');
 	});
+
+	Route::name('post.upload')->post('/upload/image', 'HomeController@upload');
 });

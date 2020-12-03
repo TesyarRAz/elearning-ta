@@ -2,7 +2,7 @@
 	@csrf
 
 	<div class="modal fade" id="modal-create-modul">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="min-width: 80%">
 			<div class="modal-content">
 				<div class="modal-header">
 					<span class="modal-title">Tambah Modul</span>
@@ -44,7 +44,13 @@
 		$(document).ready(function() {
 			$("#modul-pelajaran-create").select2();
 
-			ClassicEditor.create(document.querySelector("#modul-keterangan-create"));
+			CKEDITOR.replace(
+				document.querySelector("#modul-keterangan-create"),
+				{
+					filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+            		filebrowserUploadMethod: 'form'
+				}
+			);
 		});
 	</script>
 @endpush

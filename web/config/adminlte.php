@@ -357,13 +357,13 @@ return [
                 ],
             ],
         ],
-        'CKEditor5' => [
+        'CKEditor4' => [
             'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js'
+                    'location' => '//cdn.ckeditor.com/4.15.1/standard/ckeditor.js'
                 ],
             ]
         ],

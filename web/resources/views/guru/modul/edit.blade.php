@@ -3,7 +3,7 @@
 	@method('PUT')
 
 	<div class="modal fade" id="modal-edit-modul">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="min-width: 80%">
 			<div class="modal-content">
 				<div class="modal-header">
 					<span class="modal-title">Edit Modul</span>
@@ -44,7 +44,10 @@
 	<script type="text/javascript">
 		$(document).ready(async function() {
 			$("#modul-pelajaran-edit").select2();
-			let editor = await ClassicEditor.create(document.querySelector("#modul-keterangan-edit"));
+			let editor = await CKEDITOR.replace(document.querySelector("#modul-keterangan-edit"), {
+				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+        		filebrowserUploadMethod: 'form'
+			});
 
 			window.edit = function(id) {
 				$.getJSON(`{{ url('guru/modul') }}/${id}`, data => {

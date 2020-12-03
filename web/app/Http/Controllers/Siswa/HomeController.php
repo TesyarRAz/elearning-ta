@@ -10,14 +10,32 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function profile()
+    {
+        $user = auth()->user();
+
+        return view('siswa.profile', compact('user'));
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $top_moduls = Modul::withCount('materis', 'tesses', 'quizes')->latest()->get();
+        $top_moduls = Modul::withCount('materis', 'tesses', 'quizes')->latest();
+
+        if ($request->has('search') && !empty($request->search))
+        {
+            $top_moduls
+            ->join('pelajarans', 'moduls.pelajaran_id', '=', 'pelajarans.id')
+            ->where('moduls.name', 'rlike', $request->search)
+            ->orWhere('pelajarans.name', $request->search)
+            ->orWhere('kelas', 'rlike', $request->search);
+        }
+
+        $top_moduls = $top_moduls->paginate(10);
 
         return view('siswa.index', compact('top_moduls'));
     }

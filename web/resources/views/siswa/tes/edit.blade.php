@@ -5,19 +5,17 @@
 		<h4 class="lead mb-2 pb-3 border-bottom">{{ $tes->name }}</h4>
 
 		<div class="my-5">
-			<div class="border p-5" style="min-height: 80vh; position: relative; z-index: 1">
+			<div class="border rounded p-5" style="min-height: 80vh; position: relative; z-index: 1">
 				<input type="hidden" name="soal_id" value="{{ $soal->id }}">
 				<input type="hidden" name="current_page" value="{{ $data->currentPage() }}">
 
-				<div class="position-absolute m-2" style="z-index: 1; top: 0; right: 0" id="countdown-timer">
-					
-				</div>
+				<div class="position-absolute bg-dark m-2 text-white p-2 rounded" style="z-index: 1; top: 0; right: 0" id="countdown-timer"></div>
 
 				<div style="min-height: 100%">
 					{{ $data->currentPage() }}. {!! $soal->soal !!}
 					<div class="mt-3 mb-5">
 
-						@foreach($soal->pilihans as $p)
+						@foreach($soal->pilihans()->inRandomOrder()->get() as $p)
 							<div class="form-check my-2">
 								<input type="radio" name="pilihan_id" value="{{ $p->id }}" id="pilihan-{{$loop->index}}" onchange="update({{$p->id}})" class="form-check-input" {{ $siswa_tes->pilihans->contains('pilihan_id', $p->id) ? 'checked' : '' }}>
 
@@ -70,51 +68,15 @@
 		$(document).ready(function() {
 			(function() {
 				$("#countdown-timer")
-				  .countdown('{{ $siswa_tes->sisa_waktu->format('Y/m/d H:i:s') }}', function(event) {
-				    $(this).text(
-				      event.strftime('%H:%M:%S')
-				    );
-				  });
-				// let [hours, minutes, seconds] = (function() {
-				// 	let time = '{{ $siswa_tes->sisa_waktu->format('H:i:s') }}';
-				// 	return time.split(":");
-				// })();
-
-				// hours = parseInt(hours);
-				// minutes = parseInt(minutes);
-				// seconds = parseInt(seconds);
-
-				// var cetak = function(number) {
-				// 	let str = number.toString();
-
-				// 	if (str.length < 2) {
-				// 		return "0" + str;
-				// 	}
-
-				// 	return str;
-				// }
-
-				// var x = setInterval(function() {
-				// 	seconds--;
-
-				//   	if (seconds < 0) {
-				// 	  	seconds = 59;
-				// 	  	minutes--;
-				// 	}
-
-				// 	if (minutes < 0) {
-				// 		minutes = 59;
-				// 		hours--;
-				// 	}
-
-				// 	$("#countdown-timer").text(cetak(hours) + ":" + cetak(minutes) + ":" + cetak(seconds));
-
-				// 	if (hours < 0) {
-				// 		// Fungsi Selesai disini
-				// 		clearInterval(x);
-				// 		document.location.href = "{{ route('siswa.tes.selesai', [$tes->id, $siswa_tes->id]) }}";
-				// 	}
-				// }, 1000);
+					.countdown('{{ $siswa_tes->sisa_waktu->format('Y/m/d H:i:s') }}')
+					.on('update.countdown', function(event) {
+						$(this).text(
+					      	event.strftime('%H:%M:%S')
+					    );
+					})
+					.on('finish.countdown', function() {
+						document.location.href = "{{ route('siswa.tes.selesai', [$tes->id, $siswa_tes->id]) }}";
+					});
 			})();
 		});
 	</script>
