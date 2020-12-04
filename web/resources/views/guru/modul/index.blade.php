@@ -30,6 +30,7 @@
 						<th>Nama Modul</th>
 						<th>Kelas</th>
 						<th>Tanggal Dibuat</th>
+						<th>Password</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
@@ -40,6 +41,8 @@
 
 @push('js')
 	<script type="text/javascript">
+		CKEDITOR.config.removePlugins = 'html5video';
+
 		var pelajarans = @json($pelajarans);
 
 		$(document).ready(function() {
@@ -58,6 +61,9 @@
 					{ data: 'name' },
 					{ data: 'kelas' },
 					{ data: 'created_at' },
+					{ data: 'password', render: (data, type, row) => {
+						return data == null ? "Tidak ada password" : data;
+					}},
 					{ data: 'id', render: (data, type, row) => (
 						`
 							<div class="dropdown">

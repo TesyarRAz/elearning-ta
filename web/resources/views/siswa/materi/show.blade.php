@@ -24,7 +24,7 @@
 		
 		{!! $materi->keterangan !!}
 
-		<h4 class="lead mt-5 pb-3 border-bottom">Pojok Komentar</h4>
+		{{-- <h4 class="lead mt-5 pb-3 border-bottom">Pojok Komentar</h4>
 
 		<div class="form-group">
 			<label>Komentar Anda</label>
@@ -36,6 +36,6 @@
 					<button type="submit" class="btn btn-outline-primary">Kirim</button>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 	</div>
 @endsection

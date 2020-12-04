@@ -10,7 +10,7 @@
 					<span class="text-center d-block my-4">
 						Waktu Pengerjaan: {{ $tes->waktu_pengerjaan }} Menit
 					</span>
-					<a href="{{ route('siswa.tes.start', $tes->id) }}" class="btn btn-block btn-secondary">Mulai Tes</a>
+					<a href="{{ route('siswa.tes.start', $tes->id) }}" class="btn btn-block btn-success">Mulai Tes</a>
 				</div>
 			</div>
 			<div class="border mt-5 p-3">

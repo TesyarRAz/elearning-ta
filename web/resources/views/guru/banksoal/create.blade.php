@@ -40,7 +40,10 @@
 		$(document).ready(function() {
 			$("#banksoal-pelajaran-create").select2();
 
-			ClassicEditor.create(document.querySelector("#banksoal-keterangan-create"));
+			CKEDITOR.replace(document.querySelector("#banksoal-keterangan-create"), {
+				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+        		filebrowserUploadMethod: 'form'
+			});
 		});
 	</script>
 @endpush

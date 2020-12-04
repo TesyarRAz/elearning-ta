@@ -64,6 +64,10 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'token' => 'ncBgDkXYuToAAAAAAAAAARuq3aqAKKtcifc0upbb0YOtS942RCzc2q8ybgI6lYrF',
+        ],
 
     ],
 

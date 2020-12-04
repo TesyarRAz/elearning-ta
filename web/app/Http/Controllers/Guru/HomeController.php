@@ -11,4 +11,11 @@ class HomeController extends Controller
     {
     	return view('guru.index');
     }
+
+    public function profile()
+    {
+    	$user = auth()->user();
+    	
+    	return view('guru.profile', compact('user'));
+    }
 }

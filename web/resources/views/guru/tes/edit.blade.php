@@ -53,7 +53,9 @@
 
 @push('js')
 	<script type="text/javascript">
-		$("#tes-banksoal-edit").select2();
+		$(document).ready(function() {
+			$("#tes-banksoal-edit").select2();
+		});
 
 		function edit(id) {
 			$.getJSON(`{{ url('guru/modul/' . $modul->id) }}/tes/${id}`, data => {

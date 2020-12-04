@@ -25,4 +25,19 @@ class Guru extends Model
     {
         return $this->hasMany(BankSoal::class);
     }
+
+    public function materis()
+    {
+        return $this->hasManyThrough(Materi::class, Modul::class);
+    }
+
+    public function tesses()
+    {
+        return $this->hasManyThrough(Tes::class, Modul::class);
+    }
+
+    public function quizes()
+    {
+        return $this->hasManyThrough(Quiz::class, Modul::class);
+    }
 }

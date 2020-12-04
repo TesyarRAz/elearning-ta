@@ -52,6 +52,11 @@ class ModulController extends Controller
             'pelajaran_id' => 'required|exists:pelajarans,id'
         ]);
 
+        if ($request->has('use_password'))
+        {
+            $data['password'] = \Str::random(8);
+        }
+
         auth()->user()->guru->moduls()->create($data);
 
         return back()->withStatus('Berhasil tambah modul');
@@ -93,8 +98,20 @@ class ModulController extends Controller
             'keterangan' => 'required',
             'gambar' => 'file|image',
             'kelas' => 'required',
-            'pelajaran_id' => 'required|exists:pelajarans,id'
+            'pelajaran_id' => 'required|exists:pelajarans,id',
         ]);
+
+        if ($request->has('use_password'))
+        {
+            if ($modul->password == null)
+            {
+                $data['password'] = \Str::random(8);
+            }
+        }
+        else
+        {
+            $data['password'] = null;
+        }
 
         $modul->update($data);
 

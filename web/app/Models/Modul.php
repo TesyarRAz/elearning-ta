@@ -35,4 +35,9 @@ class Modul extends Model
     {
         return $this->belongsTo(Guru::class);
     }
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('d-m-Y');
+    }
 }

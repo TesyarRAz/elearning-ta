@@ -25,24 +25,13 @@ class HomeController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'upload' => 'required|file|image'
+            'upload' => 'required|file',
+            'CKEditorFuncNum' => 'required|numeric'
         ]);
 
-        $response = \Http::acceptJson()
-        ->attach(
-            'file', $request->upload->get(), $request->upload->getClientOriginalName()
-        )
-        ->attach(
-            'attributes', with(new JsonResource([
-                'name' => $request->upload->hashName(),
-                'parent' => '127288623677'
-            ]), fn($item) => $item->toJson())
-        )
-        ->withToken('DSLSQC1U1R32kmzI7rwfr6P4CbClqE5T')
-        ->post('https://upload.box.com/api/2.0/files/content');
+        $response = $request->upload->store('shares/upload', 'dropbox');
+        $function_number = $request->CKEditorFuncNum;
 
-        dd($response);
-
-        return $response->status();
+        return response("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($function_number, '" . \Storage::disk('dropbox')->url($response) ."', '');</script>");
     }
 }

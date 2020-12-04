@@ -11,6 +11,10 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 
 use Illuminate\Pagination\Paginator;
 
+use League\Flysystem\Filesystem;
+use Spatie\Dropbox\Client as DropboxClient;
+use Spatie\FlysystemDropbox\DropboxAdapter;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,6 +35,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        \Storage::extend('dropbox', function($app, $config) {
+            return new Filesystem(new DropboxAdapter(new DropboxClient(
+                $config['token']
+            )));
+        });
         
         User::registerObserver(RegisterMailObserver::class);
         VerifyEmail::createUrlUsing(function($notifiable) {

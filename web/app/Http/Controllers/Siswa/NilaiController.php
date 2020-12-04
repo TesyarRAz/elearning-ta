@@ -15,9 +15,10 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $siswa_tesses = auth()->user()->siswa->tesses()->latest()->paginate(10);
+        $siswa_tesses = auth()->user()->siswa->tesses()->latest()->get();
+        $siswa_quizes = auth()->user()->siswa->quizes()->latest()->get();
 
-        return view('siswa.nilai.tes', compact('siswa_tesses'));
+        return view('siswa.nilai.tes', compact('siswa_tesses', 'siswa_quizes'));
     }
 
     /**

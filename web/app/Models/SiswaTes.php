@@ -29,4 +29,9 @@ class SiswaTes extends Model
     {
         return $this->tes->banksoal();
     }
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
 }

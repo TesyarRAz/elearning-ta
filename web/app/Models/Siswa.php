@@ -16,6 +16,11 @@ class Siswa extends Model
     	return $this->hasMany(SiswaTes::class);
     }
 
+    public function quizes()
+    {
+        return $this->hasMany(SiswaQuiz::class);
+    }
+
     public function materi()
     {
     	return $this->hasMany(SiswaMateri::class);
@@ -23,6 +28,9 @@ class Siswa extends Model
 
     public function scopeIsMarked($query, ...$materi)
     {
-        return $query->join('siswa_materis', 'siswa_materis.siswa_id', '=', 'siswas.id')->whereIn('siswa_materis.materi_id', collect($materi)->transform(fn($m) => $m->id))->exists();
+        return $query
+        ->join('siswa_materis', 'siswa_materis.siswa_id', '=', 'siswas.id')
+        ->whereIn('siswa_materis.materi_id', collect($materi)->transform(fn($m) => $m->id))
+        ->value('marked') ?? false;
     }
 }

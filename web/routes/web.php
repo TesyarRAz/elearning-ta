@@ -39,6 +39,9 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 
 			Route::resource('tes', 'TesController')->parameter('tes', 'tes');
 			Route::post('tes/data', 'TesController@data')->name('tes.data');
+
+			Route::resource('quiz', 'QuizController');
+			Route::post('quiz/data', 'QuizController@data')->name('quiz.data');
 		});
 
 		Route::resource('banksoal', 'BankSoalController')->parameter('banksoal', 'bankSoal');
@@ -47,6 +50,13 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 		Route::prefix('banksoal/{bankSoal}')->group(function() {
 			Route::resource('soal', 'SoalController');
 			Route::post('soal/data', 'SoalController@data')->name('soal.data');
+		});
+
+		Route::prefix('nilai')->name('nilai.')->group(function() {
+			Route::name('tes')->get('tes', 'NilaiController@tes');
+			Route::name('quiz')->get('quiz', 'NilaiController@quiz');
+			Route::name('quiz.show')->get('quiz/{siswa}', 'NilaiController@showQuiz');
+			Route::name('quiz.store')->post('quiz/{siswa}', 'NilaiController@postQuiz');
 		});
 	});
 
@@ -68,6 +78,10 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 		Route::name('tes.edit')->get('/tes/work/{tes}/{siswa_tes}', 'TesController@edit');
 		Route::name('tes.update')->post('/tes/update/{tes}/{siswa_tes}', 'TesController@update');
 		Route::name('tes.selesai')->get('/tes/selesai/{tes}/{siswa_tes}', 'TesController@selesai');
+
+		Route::name('quiz.index')->get('/quiz/{modul}', 'QuizController@index');
+		Route::name('quiz.show')->get('/quiz/{modul}/{quiz}', 'QuizController@show');
+		Route::name('quiz.update')->post('/quiz/{modul}/{quiz}', 'QuizController@update');
 
 		Route::name('nilai.index')->get('/nilai/', 'NilaiController@index');
 	});

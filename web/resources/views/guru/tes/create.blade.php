@@ -52,6 +52,8 @@
 
 @push('js')
 	<script type="text/javascript">
-		$("#tes-banksoal-create").select2();
+		$(document).ready(function() {
+			$("#tes-banksoal-create").select2();
+		});
 	</script>
 @endpush

@@ -31,7 +31,10 @@
 @push('js')
 	<script type="text/javascript">
 		$(document).ready(async function() {
-			let editor = await ClassicEditor.create(document.querySelector("#materi-keterangan-edit"));
+			let editor = await CKEDITOR.replace(document.querySelector("#materi-keterangan-edit"), {
+					filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+            		filebrowserUploadMethod: 'form'
+				});
 
 			window.edit = function(id) {
 				$.getJSON(`{{ url('guru/modul/'. $modul->id) }}/materi/${id}`, data => {

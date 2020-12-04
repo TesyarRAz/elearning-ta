@@ -40,7 +40,10 @@
 	<script type="text/javascript">
 		$(document).ready(async function() {
 			$("#banksoal-pelajaran-edit").select2();
-			let editor = await ClassicEditor.create(document.querySelector("#banksoal-keterangan-edit"));
+			let editor = await CKEDITOR.replace(document.querySelector("#banksoal-keterangan-edit"), {
+					filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+            		filebrowserUploadMethod: 'form'
+				});
 
 			window.edit = function(id) {
 				$.getJSON(`{{ url('guru/banksoal') }}/${id}`, data => {

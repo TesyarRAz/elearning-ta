@@ -27,6 +27,13 @@
 						<input type="text" name="kelas" id="modul-kelas-edit" class="form-control" required>
 					</div>
 					<div class="form-group">
+						<label>Password</label>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="modul-password-edit" name="use_password">
+							<label for="modul-password-edit" class="form-check-label">Active</label>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="modul-keterangan-edit">Keterangan</label>
 						<textarea name="keterangan" id="modul-keterangan-edit" class="form-control"></textarea>
 					</div>
@@ -44,7 +51,8 @@
 	<script type="text/javascript">
 		$(document).ready(async function() {
 			$("#modul-pelajaran-edit").select2();
-			let editor = await CKEDITOR.replace(document.querySelector("#modul-keterangan-edit"), {
+			let editor = await CKEDITOR.replace(
+				document.querySelector("#modul-keterangan-edit"), {
 				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
         		filebrowserUploadMethod: 'form'
 			});
@@ -55,6 +63,7 @@
 					$("#modul-pelajaran-edit").val(data.pelajaran_id);
 					$("#modul-name-edit").val(data.name);
 					$("#modul-kelas-edit").val(data.kelas);
+					$("#modul-password-edit").attr('checked', data.password != null);
 					
 					editor.setData(data.keterangan);
 

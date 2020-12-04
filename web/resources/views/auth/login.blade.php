@@ -13,7 +13,7 @@
 <form class="row vh-100 m-0 justify-content-center align-items-center" method="post" action="{{ route('postLogin') }}">
 	@csrf
 
-	<div class="col-md-3">
+	<div class="col-xl-3 col-lg-4 col-md-5">
 		<div class="card card-primary">
 			<div class="card-header">
 				<span class="card-title">{{ config('app.name') }}</span>
@@ -51,9 +51,9 @@
 				<button type=submit class="btn btn-block btn-primary">
                     Masuk
                 </button>
-				<a href="#" class="btn btn-block btn-sm btn-link">
+				{{-- <a href="#" class="btn btn-block btn-sm btn-link">
 					Lupa kata sandi
-				</a>
+				</a> --}}
 				<hr>
 				<a href="{{ route('register') }}" class="btn btn-block btn-success">Daftar</a>
 			</div>

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Elearning',
+    'title' => "Let's Learn",
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Elearning</b>',
+    'logo' => "<b>Let's Learn</b>",
     'logo_img' => 'assets/images/logo.png',
     'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
@@ -272,7 +272,22 @@ return [
             ]
         ],
         [
-
+            'text' => 'Kelola Nilai',
+            'url' => '#',
+            'can' => 'user_guru',
+            'icon' => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Nilai Tes',
+                    'route' => 'guru.nilai.tes',
+                    'can' => 'user_guru',
+                ],
+                [
+                    'text' => 'Nilai Quiz',
+                    'route' => 'guru.nilai.quiz',
+                    'can' => 'user_guru',
+                ]
+            ]
         ]
     ],
 
@@ -362,8 +377,8 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.ckeditor.com/4.15.1/standard/ckeditor.js'
+                    'asset' => true,
+                    'location' => 'assets/js/ckeditor/ckeditor.js'
                 ],
             ]
         ],

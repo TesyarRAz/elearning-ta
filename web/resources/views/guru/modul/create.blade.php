@@ -25,6 +25,14 @@
 						<label for="modul-kelas-create">Kelas</label>
 						<input type="text" name="kelas" id="modul-kelas-create" class="form-control" required>
 					</div>
+
+					<div class="form-group">
+						<label>Password</label>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="modul-password-create" name="use_password">
+							<label for="modul-password-create" class="form-check-label">Active</label>
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="modul-keterangan-create">Keterangan</label>
 						<textarea name="keterangan" id="modul-keterangan-create" class="form-control"></textarea>
@@ -43,12 +51,12 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#modul-pelajaran-create").select2();
-
+			
 			CKEDITOR.replace(
 				document.querySelector("#modul-keterangan-create"),
 				{
 					filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
-            		filebrowserUploadMethod: 'form'
+            		filebrowserUploadMethod: 'form',
 				}
 			);
 		});

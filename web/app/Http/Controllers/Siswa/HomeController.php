@@ -32,7 +32,12 @@ class HomeController extends Controller
             ->join('pelajarans', 'moduls.pelajaran_id', '=', 'pelajarans.id')
             ->where('moduls.name', 'rlike', $request->search)
             ->orWhere('pelajarans.name', $request->search)
-            ->orWhere('kelas', 'rlike', $request->search);
+            ->orWhere('kelas', 'rlike', $request->search)
+            ->orWhere('password', $request->search);
+        }
+        else
+        {
+            $top_moduls->wherePassword(null);
         }
 
         $top_moduls = $top_moduls->paginate(10);

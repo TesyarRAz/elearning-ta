@@ -30,7 +30,10 @@
 @push('js')
 	<script type="text/javascript">
 		$(document).ready(function() {
-			ClassicEditor.create(document.querySelector("#materi-keterangan-create"));
+			CKEDITOR.replace(document.querySelector("#materi-keterangan-create"), {
+				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+        		filebrowserUploadMethod: 'form'
+			});
 		});
 	</script>
 @endpush

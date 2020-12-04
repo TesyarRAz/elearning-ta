@@ -22,6 +22,7 @@ class CreateModulsTable extends Migration
 
             $table->string('name');
             $table->text('keterangan');
+            $table->string('password')->nullable();
             
             $table->string('gambar')->nullable();
 
