@@ -130,4 +130,12 @@ class ModulController extends Controller
 
         return back()->withStatus('Berhasil hapus modul');
     }
+
+    public function export(Modul $modul)
+    {
+        return \Maatwebsite\Excel\Facades\Excel::download(
+            new \App\Exports\NilaiExport($modul),
+            $modul->name . '.xlsx'
+        );
+    }
 }

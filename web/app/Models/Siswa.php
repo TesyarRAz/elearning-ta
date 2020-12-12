@@ -26,11 +26,24 @@ class Siswa extends Model
     	return $this->hasMany(SiswaMateri::class);
     }
 
-    public function scopeIsMarked($query, ...$materi)
+    public function moduls()
+    {
+        return $this->hasMany(SiswaModul::class);
+    }
+
+    public function scopeIsMarkedMateri($query, ...$materi)
     {
         return $query
-        ->join('siswa_materis', 'siswa_materis.siswa_id', '=', 'siswas.id')
-        ->whereIn('siswa_materis.materi_id', collect($materi)->transform(fn($m) => $m->id))
+        ->join('siswa_materis', 'siswa_materis.siswa_id', 'siswas.id')
+        ->whereIn('siswa_materis.materi_id', $materi)
         ->value('marked') ?? false;
+    }
+
+    public function scopeIsFollowModul($query, ...$modul)
+    {
+        return $query
+        ->join('siswa_moduls', 'siswa_moduls.siswa_id', 'siswas.id')
+        ->whereIn('siswa_moduls.modul_id', $modul)
+        ->value('follow') ?? false;
     }
 }

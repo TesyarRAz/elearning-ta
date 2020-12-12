@@ -4,10 +4,10 @@
 <div class="my-3">
 	<div class="row">
 		<div class="col">
-			<h4 class="lead mb-2 pb-3 border-bottom">Daftar Modul</h4>
+			<h4 class="lead mb-2 pb-3 border-bottom">Daftar Modul Yang Diikuti</h4>
 		</div>
 		<div class="col-md-3 col-5">
-			<form action="{{ route('siswa.index') }}" class="input-group">
+			<form action="{{ route('siswa.modul.index') }}" class="input-group">
 				<input type="search" name="search" class="form-control" placeholder="Search">
 				<div class="input-group-append">
 					<button class="btn btn-outline-primary">
@@ -19,7 +19,7 @@
 	</div>
 	
 	<div class="row">
-		@foreach($top_moduls as $top)
+		@foreach($moduls->map(fn($e) => $e->modul) as $top)
 		<div class="col-lg-4 col-md-6 col-xs-12 my-2">
 			<div class="card h-100">
 				<div class="card-header bg-primary text-white">
@@ -51,7 +51,7 @@
 	</div>
 
 	<div class="my-2">
-		{{ $top_moduls->links() }}
+		{{ $moduls->links() }}
 	</div>
 </div>
 @endsection

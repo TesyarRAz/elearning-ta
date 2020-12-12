@@ -51,7 +51,9 @@ class QuizController extends Controller
      */
     public function show(Modul $modul, Quiz $quiz)
     {
-        return view('siswa.quiz.show', compact('quiz', 'modul'));
+        $siswa_quiz = auth()->user()->siswa->quizes()->whereKey($quiz->id)->first();
+
+        return view('siswa.quiz.show', compact('quiz', 'modul', 'siswa_quiz'));
     }
 
     /**

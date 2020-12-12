@@ -26,6 +26,16 @@ class Modul extends Model
     	return $this->hasMany(Quiz::class);
     }
 
+    public function siswatesses()
+    {
+        return $this->hasManyThrough(SiswaTes::class, Tes::class);
+    }
+
+    public function siswaquizes()
+    {
+        return $this->hasManyThrough(SiswaQuiz::class, Quiz::class);
+    }
+
     public function pelajaran()
     {
         return $this->belongsTo(Pelajaran::class);

@@ -1,6 +1,12 @@
 @extends('siswa.layout')
 
 @section('content')
+	@if(!empty($siswa_quiz))
+		<div class="alert alert-warning">
+			<p>Jawaban yang sudah diberikan tidak bisa dirubah</p>
+		</div>
+	@endif
+
 	<div class="my-3">
 		<div class="clearfix border-bottom pb-3 mb-2">
 
@@ -21,9 +27,9 @@
 
 			<label>Jawaban Anda</label>
 			<div class="form-group">
-				<textarea name="jawaban" id="quiz-jawab" class="form-control"></textarea>
+				<textarea name="jawaban" id="quiz-jawab" class="form-control" @if(!empty($siswa_quiz)) readonly @endif></textarea>
 				<div class="clearfix mt-2">
-					<button type="submit" class="btn btn-outline-primary float-right">Kirim</button>
+					<button type="submit" class="btn btn-outline-primary float-right" @if(!empty($siswa_quiz)) disabled @endif>Kirim</button>
 				</div>
 			</div>
 		</form>
@@ -34,10 +40,14 @@
 	<script type="text/javascript" src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			CKEDITOR.replace(document.querySelector('#quiz-jawab'), {
+			let editor = CKEDITOR.replace(document.querySelector('#quiz-jawab'), {
 				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
         		filebrowserUploadMethod: 'form'
 			});
+
+			@if(!empty($siswa_quiz))
+				editor.setData('{!! $siswa_quiz->jawaban !!}');
+			@endif
 		});
 	</script>
 @endpush

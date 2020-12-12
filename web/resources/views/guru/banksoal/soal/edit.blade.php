@@ -55,6 +55,11 @@
 @push('js')
 	<script type="text/javascript">
 		$(document).ready(function() {
+			let editorSoal = CKEDITOR.replace(document.querySelector("#soal-soal-edit"), {
+				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+        		filebrowserUploadMethod: 'form'
+			});
+
 			var vueCallback;
 
 			new Vue({
@@ -81,7 +86,7 @@
 				$.getJSON(`{{ url('guru/banksoal/' . $bankSoal->id) }}/soal/${id}`, data => {
 					$("#form-edit-soal").attr('action', `{{ url('guru/banksoal/' . $bankSoal->id) }}/soal/${id}`);
 
-					$("#soal-soal-edit").val(data.soal);
+					editorSoal.setData(data.soal);
 
 					vueCallback(data);
 

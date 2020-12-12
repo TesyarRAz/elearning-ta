@@ -25,7 +25,7 @@
 							<tbody>
 								<tr v-for="(pilihan, index) in pilihans" :key="index">
 									<td>
-										<input type="text" :name="`pilihans[${index}][pilihan]`" class="form-control">
+										<input type="text" :id="`pilihans_${index}`" :name="`pilihans[${index}][pilihan]`" class="form-control">
 									</td>
 									<td>
 										<input type="checkbox" :name="`pilihans[${index}][benar]`" class="form-check">
@@ -53,7 +53,10 @@
 @push('js')
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+			let editorSoal = CKEDITOR.replace(document.querySelector("#soal-soal-create"), {
+				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+        		filebrowserUploadMethod: 'form'
+			});
 			
 			new Vue({
 				el: '#soal-pilihan-create',

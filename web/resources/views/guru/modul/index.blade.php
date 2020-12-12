@@ -81,6 +81,8 @@
 										<a class="dropdown-item" href="{{ url('guru/modul') }}/${data}/tes">Tes</a>
 										<a class="dropdown-item" href="{{ url('guru/modul') }}/${data}/quiz">Quiz</a>
 									</div>
+
+									<a href="{{ url('guru/modul') }}/${data}/export" class="btn btn-sm btn-outline-success">Cetak</a>
 								</div>
 
 								<form id="form-delete-${data}" action="{{ url('guru/modul') }}/${data}" method="POST" onsubmit="return confirm('Yakin ingin dihapus')">

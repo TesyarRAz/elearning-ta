@@ -41,14 +41,14 @@ class UserController extends Controller
     		auth()->user()->update(['api_token' => \Str::random(40)]);
 
     		return response([
-    			'code' => '0',
+    			'code' => 1,
     			'message' => '',
     			'data' => auth()->user()
     		]);
     	}
 
     	return response([
-    		'code' => '0',
+    		'code' => 0,
     		'message' => 'Anda tidak terdaftar di basis data kami',
     		'errors' => [
     			'username_email' => 'Anda tidak terdaftar di basis data kami'

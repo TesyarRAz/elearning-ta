@@ -30,6 +30,9 @@
 				<li class="nav-item">
 					<a href="{{ route('siswa.nilai.index') }}" class="nav-link">Nilai</a>
 				</li>
+				<li class="nav-item">
+					<a href="{{ route('siswa.modul.index') }}" class="nav-link">Modul</a>
+				</li>
 			</ul>
 
 			<ul class="navbar-nav ml-auto">

@@ -10,7 +10,7 @@
 					<div class="clearfix">
 						<span class="float-left">{{ $materi->name }}</span>
 						<!-- Query Berat ini -->
-						@if(auth()->user()->siswa->isMarked($materi))
+						@if(auth()->user()->siswa->isMarkedMateri($materi))
 							<span class="border rounded py-1 px-2 float-right">Selesai</span>
 						@endif
 					</div>

@@ -32,8 +32,10 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 
 		Route::resource('modul', 'ModulController');
 		Route::post('modul/data', 'ModulController@data')->name('modul.data');
+		Route::get('modul/{modul}/export', 'ModulController@export')->name('modul.export');
 
 		Route::prefix('modul/{modul}')->group(function() {
+
 			Route::resource('materi', 'MateriController');
 			Route::post('materi/data', 'MateriController@data')->name('materi.data');
 
@@ -70,6 +72,10 @@ Route::middleware(['auth', 'verified:login'])->group(function() {
 		Route::name('materi.show')->get('/materi/{modul}/learn/{materi}', 'MateriController@show');
 		Route::name('materi.mark')->get('/materi/mark/{materi}', 'MateriController@mark');
 		Route::name('materi.unmark')->get('/materi/unmark/{materi}', 'MateriController@unmark');
+
+		Route::name('modul.index')->get('/modul/follow', 'ModulController@index');
+		Route::name('modul.follow')->get('/modul/follow/{modul}', 'ModulController@follow');
+		Route::name('modul.unfollow')->get('/modul/unfolow/{modul}', 'ModulController@unfollow');
 
 		Route::name('tes.index')->get('/tes/{modul}', 'TesController@index');
 		Route::name('tes.show')->get('/tes/join/{tes}', 'TesController@show');

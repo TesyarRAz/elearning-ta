@@ -23,10 +23,6 @@ Route::get('/pelajaran', 'PelajaranController@index');
 Route::prefix('modul/{modul}')->group(function() {
 	Route::apiResource('materi', 'MateriController')->only(['index', 'show']);
 	Route::apiResource('tes', 'TesController')->only(['index', 'show'])->parameter('tes', 'tes');
-
-	Route::middleware(['auth:api', 'can:user_siswa'])->group(function() {
-		Route::post('/tes/{tes}/jawab', 'TesController@jawab');
-	});
 });
 
 Route::middleware(['auth:api', 'can:user_siswa'])->group(function() {

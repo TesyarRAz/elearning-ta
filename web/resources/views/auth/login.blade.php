@@ -13,12 +13,16 @@
 <form class="row vh-100 m-0 justify-content-center align-items-center" method="post" action="{{ route('postLogin') }}">
 	@csrf
 
-	<div class="col-xl-3 col-lg-4 col-md-5">
-		<div class="card card-primary">
-			<div class="card-header">
-				<span class="card-title">{{ config('app.name') }}</span>
+	<div class="col-xl-3 col-lg-4 d-lg-block d-md-none border p-2 h-50 m-0">
+		<img src="{{ asset('assets/images/logo.png') }}" width="100%" height="100%">
+	</div>
+
+	<div class="col-xl-3 col-lg-4 col-md-5 h-50 p-0">
+		<div class="border h-100 m-0">
+			<div class="border-bottom p-3">
+				<span>{{ config('app.name') }}</span>
 			</div>
-			<div class="card-body">
+			<div class="p-3">
 				<div class="input-group mb-3">
 					<input type="text" name="username_email" class="form-control @error('username_email') is-invalid @enderror" placeholder="Masukan Username atau Email" value="{{ old('username_email') }}" required>
 
