@@ -31,7 +31,10 @@
 @push('js')
 	<script type="text/javascript" async>
 		$(document).ready(async function() {
-			let editor = await ClassicEditor.create(document.querySelector("#pelajaran-keterangan-edit"));
+			let editor = await CKEDITOR.replace(document.querySelector("#pelajaran-keterangan-edit"), {
+				filebrowserUploadUrl: "{{route('post.upload', ['_token' => csrf_token() ])}}",
+        		filebrowserUploadMethod: 'form'
+			});
 		
 			window.edit = function(id) {
 				$.getJSON(`{{ url('admin/pelajaran') }}/${id}`, data => {
