@@ -14,7 +14,7 @@
 	@stack('css')
 </head>
 <body>
-	<nav class="navbar navbar-expand navbar-light bg-light">
+	<nav class="navbar navbar-expand-md navbar-light bg-light">
 		<a href="{{ route('home') }}" class="navbar-brand">
 			<img src="{{ asset('assets/images/logo.png') }}" width="30" height="30" class="d-inline-block">
 			Elearning
