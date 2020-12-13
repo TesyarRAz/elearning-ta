@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function adminlte_desc()
     {
-        return '<p>'.$this->role()->name.'</p><p>'.$this->email.'</p>';
+        return '<p>'.optional($this->role())->name ?? $this->username.'</p><p>'.$this->email.'</p>';
     }
 
     public function adminlte_profile_url()
