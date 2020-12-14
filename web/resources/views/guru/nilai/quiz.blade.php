@@ -86,7 +86,7 @@
 								@endif
 							</td>
 							<td>
-								<button onclick="nilai({{ $d->id }})" class="btn btn-sm btn-outline-primary @if($d->dinilai) disabled @endif">
+								<button onclick="nilai({{ $d->id }})" class="btn btn-sm btn-outline-primary @if($d->dinilai) disabled @endif" @if($d->dinilai) disabled @endif>
 									Beri Nilai
 								</button>
 							</td>

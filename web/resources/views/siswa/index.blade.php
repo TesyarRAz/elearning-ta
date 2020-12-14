@@ -26,9 +26,9 @@
 					<div class="clearfix">
 						<h5 class="card-title float-left">{{ $top->name }}</h5>
 						@if(!auth()->user()->siswa->isFollowModul($top->id))
-							<a href="{{ route('siswa.modul.follow', $top->id) }}" class="btn btn-sm btn-warning float-right">Follow</a>
+							<a href="{{ route('siswa.modul.follow', $top->id) }}" class="btn btn-sm btn-light float-right">Follow</a>
 							@else
-							<a href="{{ route('siswa.modul.unfollow', $top->id) }}" class="btn btn-sm btn-warning float-right">Unfollow</a>
+							<a href="{{ route('siswa.modul.unfollow', $top->id) }}" class="btn btn-sm btn-light float-right">Unfollow</a>
 						@endif
 					</div>
 					<span class="d-block">Dibuat oleh: <b>{{ $top->guru->name }}</b></span>
