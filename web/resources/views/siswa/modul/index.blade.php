@@ -23,7 +23,7 @@
 		<div class="col-lg-4 col-md-6 col-xs-12 my-2">
 			<div class="card h-100">
 				<div class="card-header bg-white text-white">
-					<a href="#" data-toggle="popover" data-html="true" data-content="{!! $top->keterangan !!}">
+					<a href="#" data-trigger="focus" data-toggle="popover" data-html="true" data-content="{!! $top->keterangan !!}">
 						<img src="{{ $top->gambar ?? asset('assets/images/icon/module.png') }}" class="card-img-top" height="200px" @empty($top->gambar) style="filter: invert(1);" @endempty>
 					</a>
 				</div>
@@ -35,14 +35,12 @@
 					<span class="d-block">Kelas: <b>{{ $top->kelas }}</b></span>
 				</div>
 				<div class="card-footer bg-white clearfix">
-					<div class="clearfix float-left">
+					<div class="btn-group float-right">
 						@if(!auth()->user()->siswa->isFollowModul($top->id))
 							<a href="{{ route('siswa.modul.follow', $top->id) }}" class="btn btn-sm btn-outline-primary">Follow</a>
 							@else
 							<a href="{{ route('siswa.modul.unfollow', $top->id) }}" class="btn btn-sm btn-outline-primary">Unfollow</a>
 						@endif
-					</div>
-					<div class="btn-group float-right">
 						<a href="{{ route('siswa.materi.index', $top->id) }}" class="btn btn-sm btn-outline-primary">Materi <b>{{ $top->materis_count }}</b></a>
 						<a href="{{ route('siswa.tes.index', $top->id) }}" class="btn btn-sm btn-outline-primary">Tes <b>{{ $top->tesses_count }}</b></a>
 						<a href="{{ route('siswa.quiz.index', $top->id) }}" class="btn btn-sm btn-outline-primary">Quiz <b>{{ $top->quizes_count }}</b></a>
@@ -58,3 +56,13 @@
 	</div>
 </div>
 @endsection
+
+@push('js')
+	<script type="text/javascript">
+		$(function () {
+		  $('[data-toggle="popover"]').popover({
+		  	trigger: 'focus'
+		  })
+		});
+	</script>
+@endpush
