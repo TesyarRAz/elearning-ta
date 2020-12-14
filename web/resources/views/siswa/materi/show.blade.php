@@ -11,7 +11,7 @@
 				<h4 class="lead d-inline-block">{{ $materi->name }}</h4>
 			</div>
 
-			@if(!auth()->user()->siswa->isMarkedMateri($materi))
+			@if(!auth()->user()->siswa()->isMarkedMateri($materi))
 				<a href="{{ route('siswa.materi.mark', $materi->id) }}" class="btn btn-sm btn-outline-primary float-right">
 					Tandai sudah dipelajari
 				</a>
