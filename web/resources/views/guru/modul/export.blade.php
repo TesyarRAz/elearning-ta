@@ -26,13 +26,13 @@
     </thead>
     <tbody>
         @php($relation = $modul->tesses()->count() > $modul->quizes()->count() ? $modul->siswatesses() : $modul->siswaquizes())
-        @php($relation->with('siswa'))
+        {{-- @php($relation->with('siswa')) --}}
     	@forelse($relation->get() as $d)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $d->siswa->name }}</td>
                 @forelse($modul->tesses as $t)
-                    @php($st = $modul->siswatesses()->whereTesId($t->id)->whereSiswaId($d->id)->first())
+                    @php($st = $modul->siswatesses()->whereTesId($t->id)->whereSiswaId($d->siswa_id)->first())
                     @if(empty($st))
                         <td></td>
                         @else
@@ -44,7 +44,7 @@
                 @endforelse
 
                 @forelse($modul->quizes as $t)
-                    @php($st = $modul->siswaquizes()->whereQuizId($t->id)->whereSiswaId($d->id)->first())
+                    @php($st = $modul->siswaquizes()->whereQuizId($t->id)->whereSiswaId($d->siswa_id)->first())
                     @if(empty($st))
                         <td></td>
                         @else
