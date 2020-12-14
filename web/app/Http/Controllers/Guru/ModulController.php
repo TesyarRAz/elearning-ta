@@ -146,7 +146,11 @@ class ModulController extends Controller
      */
     public function destroy(Modul $modul)
     {
-        $modul->delete();
+        try {
+            $modul->delete();
+        } catch (\Exception $e) {
+            return back()->withStatus('Modul sudah digunakan tidak bisa dihapus');
+        }
 
         return back()->withStatus('Berhasil hapus modul');
     }

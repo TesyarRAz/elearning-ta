@@ -159,8 +159,12 @@ class SoalController extends Controller
      */
     public function destroy(BankSoal $bankSoal, Soal $soal)
     {
-        $soal->pilihans()->delete();
-        $soal->delete();
+        try {
+            $soal->pilihans()->delete();
+            $soal->delete();
+        } catch (\Exception $e) {
+            return back()->withStatus('Soal sudah digunakan tidak bisa dihapus');
+        }
 
         return back()->withStatus('Berhasil hapus soal');
     }

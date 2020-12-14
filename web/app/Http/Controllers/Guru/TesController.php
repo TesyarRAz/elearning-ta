@@ -109,7 +109,11 @@ class TesController extends Controller
      */
     public function destroy(Modul $modul, Tes $tes)
     {
-        $tes->delete();
+        try {
+            $tes->delete();
+        } catch (\Exception $e) {
+            return back()->withStatus('Tes sudah digunakan tidak bisa dihapus');
+        }
 
         return back()->withStatus('Berhasil hapus tes');
     }

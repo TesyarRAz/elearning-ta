@@ -107,8 +107,12 @@ class BankSoalController extends Controller
      */
     public function destroy(BankSoal $bankSoal)
     {
-        $banksoal->soals()->delete();
-        $bankSoal->delete();
+        try {
+            $banksoal->soals()->delete();
+            $bankSoal->delete();
+        } catch (\Exception $e) {
+            return back()->withStatus('BankSoal sudah digunakan tidak bisa dihapus');
+        }
 
         return back()->withStatus('Berhasil hapus bank soal');
     }

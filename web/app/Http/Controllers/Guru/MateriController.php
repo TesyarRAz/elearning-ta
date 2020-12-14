@@ -104,7 +104,11 @@ class MateriController extends Controller
      */
     public function destroy(Modul $modul, Materi $materi)
     {
-        $materi->delete();
+        try {
+            $materi->delete();
+        } catch (\Exception $e) {
+            return back()->withStatus('Materi sudah digunakan tidak bisa dihapus');
+        }
 
         return back()->withStatus('Berhasil hapus materi');
     }

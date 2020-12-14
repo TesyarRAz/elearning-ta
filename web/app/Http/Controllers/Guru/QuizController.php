@@ -104,7 +104,11 @@ class QuizController extends Controller
      */
     public function destroy(Modul $modul, Quiz $quiz)
     {
-        $quiz->delete();
+        try {
+            $quiz->delete();
+        } catch (\Exception $e) {
+            return back()->withStatus('Quiz sudah digunakan tidak bisa dihapus');
+        }
 
         return back()->withStatus('Berhasil hapus quiz');
     }
