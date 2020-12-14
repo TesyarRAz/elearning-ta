@@ -47,10 +47,20 @@ class ModulController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'keterangan' => 'required',
-            'gambar' => 'file|image',
             'kelas' => 'required',
             'pelajaran_id' => 'required|exists:pelajarans,id'
         ]);
+
+        if ($request->has('gambar'))
+        {
+            $request->validate([
+                'gambar' => 'required|file|image'
+            ]);
+
+            $data['gambar'] = \Storage::disk('dropbox')->url(
+                $request->gambar->store('shares/upload', 'dropbox')
+            );
+        }
 
         if ($request->has('use_password'))
         {
@@ -96,10 +106,20 @@ class ModulController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'keterangan' => 'required',
-            'gambar' => 'file|image',
             'kelas' => 'required',
             'pelajaran_id' => 'required|exists:pelajarans,id',
         ]);
+
+        if ($request->has('gambar'))
+        {
+            $request->validate([
+                'gambar' => 'required|file|image'
+            ]);
+
+            $data['gambar'] = \Storage::disk('dropbox')->url(
+                $request->gambar->store('shares/upload', 'dropbox')
+            );
+        }
 
         if ($request->has('use_password'))
         {

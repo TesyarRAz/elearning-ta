@@ -1,4 +1,4 @@
-<form method="POST" id="form-edit-modul">
+<form method="POST" id="form-edit-modul" enctype="multipart/form-data">
 	@csrf
 	@method('PUT')
 
@@ -17,6 +17,10 @@
 								<option value="{{ $pelajaran->id }}">{{ $pelajaran->name }}</option>
 							@endforeach
 						</select>
+					</div>
+					<div class="form-group">
+						<label for="modul-gambar-edit">Gambar</label>
+						<input type="file" name="gambar" id="modul-gambar-edit" class="form-control-file" accept="image/*">
 					</div>
 					<div class="form-group">
 						<label for="modul-name-edit">Name</label>

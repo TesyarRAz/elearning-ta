@@ -1,4 +1,4 @@
-<form action="{{ route('guru.modul.store')}}" method="POST">
+<form action="{{ route('guru.modul.store')}}" method="POST" enctype="multipart/form-data">
 	@csrf
 
 	<div class="modal fade" id="modal-create-modul">
@@ -16,6 +16,10 @@
 								<option value="{{ $pelajaran->id }}">{{ $pelajaran->name }}</option>
 							@endforeach
 						</select>
+					</div>
+					<div class="form-group">
+						<label for="modul-gambar-create">Gambar</label>
+						<input type="file" name="gambar" id="modul-gambar-create" class="form-control-file" accept="image/*">
 					</div>
 					<div class="form-group">
 						<label for="modul-name-create">Name</label>
