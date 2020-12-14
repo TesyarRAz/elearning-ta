@@ -22,23 +22,26 @@
 		@foreach($moduls->map(fn($e) => $e->modul) as $top)
 		<div class="col-lg-4 col-md-6 col-xs-12 my-2">
 			<div class="card h-100">
-				<div class="card-header bg-primary text-white">
-					<div class="clearfix">
-						<h5 class="card-title float-left">{{ $top->name }}</h5>
-						@if(!auth()->user()->siswa->isFollowModul($top->id))
-							<a href="{{ route('siswa.modul.follow', $top->id) }}" class="btn btn-sm btn-warning float-right">Follow</a>
-							@else
-							<a href="{{ route('siswa.modul.unfollow', $top->id) }}" class="btn btn-sm btn-warning float-right">Unfollow</a>
-						@endif
-					</div>
+				<div class="card-header bg-white text-white">
+					<a href="#" data-toggle="popover" data-html="true" data-content="{!! $top->keterangan !!}">
+						<img src="{{ $top->gambar ?? asset('assets/images/icon/module.png') }}" class="card-img-top" height="200px" @empty($top->gambar) style="filter: invert(1);" @endempty>
+					</a>
+				</div>
+				<div class="card-body">
+					{{-- {!! $top->keterangan !!} --}}
+					<h5 class="leading">{{ $top->name }}</h5>
 					<span class="d-block">Dibuat oleh: <b>{{ $top->guru->name }}</b></span>
 					<span class="d-block">Pelajaran: <b>{{ $top->pelajaran->name }}</b></span>
 					<span class="d-block">Kelas: <b>{{ $top->kelas }}</b></span>
 				</div>
-				<div class="card-body">
-					{!! $top->keterangan !!}
-				</div>
 				<div class="card-footer bg-white clearfix">
+					<div class="clearfix float-left">
+						@if(!auth()->user()->siswa->isFollowModul($top->id))
+							<a href="{{ route('siswa.modul.follow', $top->id) }}" class="btn btn-sm btn-outline-primary">Follow</a>
+							@else
+							<a href="{{ route('siswa.modul.unfollow', $top->id) }}" class="btn btn-sm btn-outline-primary">Unfollow</a>
+						@endif
+					</div>
 					<div class="btn-group float-right">
 						<a href="{{ route('siswa.materi.index', $top->id) }}" class="btn btn-sm btn-outline-primary">Materi <b>{{ $top->materis_count }}</b></a>
 						<a href="{{ route('siswa.tes.index', $top->id) }}" class="btn btn-sm btn-outline-primary">Tes <b>{{ $top->tesses_count }}</b></a>

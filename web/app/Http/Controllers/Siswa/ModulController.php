@@ -11,7 +11,9 @@ class ModulController extends Controller
 {
     public function index(Request $request)
     {
-        $moduls = auth()->user()->siswa->moduls()->with('modul')->whereFollow(true)->latest();
+        $moduls = auth()->user()->siswa->moduls()->with(['modul' => function($query) {
+            $query->withCount('materis', 'tesses', 'quizes');
+        }])->whereFollow(true)->latest();
 
         if ($request->has('search') && !empty($request->search))
         {
