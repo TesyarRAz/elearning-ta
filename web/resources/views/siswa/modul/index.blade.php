@@ -22,11 +22,9 @@
 		@foreach($moduls->map(fn($e) => $e->modul) as $top)
 		<div class="col-lg-4 col-md-6 col-xs-12 my-2">
 			<div class="card h-100">
-				<div class="card-header bg-white text-white">
-					<a href="#" data-trigger="focus" data-toggle="popover" data-html="true" data-content="{!! $top->keterangan !!}">
-						<img src="{{ $top->gambar ?? asset('assets/images/icon/module.png') }}" class="card-img-top" height="200px" @empty($top->gambar) style="filter: invert(1);" @endempty>
-					</a>
-				</div>
+				<a href="#" data-trigger="focus" data-toggle="popover" data-html="true" data-content="{!! $top->keterangan !!}">
+					<img src="{{ $top->gambar ?? asset('assets/images/icon/100-book.png') }}" class="card-img-top" height="200px">
+				</a>
 				<div class="card-body">
 					{{-- {!! $top->keterangan !!} --}}
 					<h5 class="leading">{{ $top->name }}</h5>
